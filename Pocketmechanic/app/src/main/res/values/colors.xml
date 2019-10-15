@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="deep_purple" >#4a148c</color>
+    <color name="white" >#FFF</color>
+    <color name="blue_grey" >#37474f</color>
+    <color name="light_blue" >#01579b</color>
+    <color name="indigo" >#1a237e</color>
+    <color name="pink" >#e91e63</color>
+    <color name="purple" >#9c27b0</color>
+    <color name="black" >#000000</color>
+    <color name="red" > #f44336</color>
+    <color name="dark_cyan" >#006064</color>
+    <color name="light_cyan" >#00ACC1</color>
+    <color name="cyan" >#00838F</color>
+    <color name="light_blue_2" >#039be5</color>
+    <color name="light_blue_grey" >#eceff1</color>
+    <color name="green" >#4caf50</color>
+    <color name="teal" >#009688</color>
+    <color name="dark_teal" >#004d40</color>
+    <color name="light_pink" >#f8bbd0</color>
+    <color name="lighter_pink" >#fce4ec</color>
+    <color name="lighter_cyan" >#84ffff</color>
+    <color name="lighter_purple" >#e1bee7</color>
+    <color name="grey" >#9e9e9e</color>
+    <color name="eighty_percent_visible_white" >#ccffffff</color>
+    <color name="light_grey" >#e0e0e0</color>
+    <color name="dark_grey" >#616161</color>
+    <color name="gold" >#e17321</color>
+</resources>
