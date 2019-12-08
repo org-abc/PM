@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/dialog_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        tools:ignore="MissingConstraints" />
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Drop off location"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:background="#FFFFFF"/>
+
+        <ProgressBar
+                android:id="@+id/full_map_loading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="100dp"/>
+
+        <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="0, 1"
+                android:shrinkColumns="0, 1"
+                android:layout_alignParentBottom="true">
+
+            <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <Button
+                        android:id="@+id/dialog_change_loc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="change location"
+                        android:textColor="@color/white"
+                        android:background="@drawable/go_button_background"
+                        android:layout_margin="5dp"
+                        android:textSize="12sp"
+                        android:padding="10dp"
+                        android:visibility="gone"/>
+
+                <Button
+                        android:id="@+id/dialog_keep_loc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Use this location"
+                        android:textSize="12dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/green_backg"
+                        android:layout_margin="5sp"
+                        android:padding="10dp"
+                        android:visibility="gone"/>
+
+            </TableRow>
+
+        </TableLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

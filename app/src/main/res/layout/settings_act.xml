@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/settings_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="4dp"></androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Default map type"
+        android:textColor="@color/black"
+        android:layout_margin="15dp"
+        android:textSize="17dp"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0, 1, 2, 3"
+        android:shrinkColumns="0, 1, 2, 3"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/normal_map_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Normal" />
+
+            <CheckBox
+                android:id="@+id/hybrid_map_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hybrid"/>
+
+            <CheckBox
+                android:id="@+id/satellite_map_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Satellite"/>
+
+            <CheckBox
+                android:id="@+id/terrain_map_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terrain"/>
+
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

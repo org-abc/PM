@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:stretchColumns="0"
+                    android:shrinkColumns="0">
+
+                <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        <ImageView
+                                android:id="@+id/add_user_dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="25dp"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/camera_icon"
+                                android:padding="1dp"
+                                android:elevation="4dp"/>
+
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Click to set icon*"
+                                android:layout_alignParentBottom="true"
+                                android:gravity="center_horizontal"
+                                android:textColor="@color/grey"/>
+
+                    </LinearLayout>
+
+                </TableRow>
+            </TableLayout>
+
+            <EditText
+                android:id="@+id/client_fname"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="First name"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/big_box_edittext"
+                android:padding="5dp"/>
+
+            <EditText
+                android:id="@+id/client_lname"
+                android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="Last name"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/big_box_edittext"
+                android:padding="5dp"/>
+
+            <EditText
+                android:id="@+id/client_email"
+                android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="Email"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/big_box_edittext"
+                android:padding="5dp"/>
+
+            <EditText
+                android:id="@+id/client_phone"
+                android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="Phone number"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/big_box_edittext"
+                android:inputType="number"
+                android:padding="5dp"/>
+
+            <EditText
+                android:id="@+id/client_pass"
+                android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="Password"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/big_box_edittext"
+                android:inputType="textPassword"
+                android:padding="5dp"/>
+
+            <EditText
+                android:id="@+id/client_conf_pass"
+                android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="Conform Password"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="40dp"
+                android:inputType="textPassword"
+                android:background="@drawable/big_box_edittext"
+                android:padding="5dp"/>
+
+            <TextView
+                android:id="@+id/sign_up_button"
+                android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:text="Sign up"
+                android:background="@drawable/green_backg"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

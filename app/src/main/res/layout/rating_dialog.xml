@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rate our service"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-condensed"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/go_button_background"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Driver"
+                android:textSize="25sp"
+                android:gravity="center"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-condensed"/>
+
+        <RatingBar
+                android:id="@+id/driver_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:rating="5"
+                android:clickable="true" />
+
+        <EditText
+                android:id="@+id/driver_review"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:padding="5dp"
+                android:hint="fast and reliable"
+                android:background="@drawable/big_box_edittext"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Restaurant"
+                android:textSize="25sp"
+                android:gravity="center"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-condensed"/>
+
+        <RatingBar
+                android:id="@+id/restaurant_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:rating="5"
+                android:clickable="true" />
+
+        <EditText
+                android:id="@+id/restaurant_review"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:padding="5dp"
+                android:hint="The food is great"
+                android:background="@drawable/big_box_edittext"/>
+
+        <TextView
+                android:id="@+id/submit_rating"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/go_button_background"
+                android:text="Submit rating"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_margin="20dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

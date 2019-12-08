@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="0"
+    android:shrinkColumns="0">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="You have to enter your LOCATION manually to continue"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_margin="15dp"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/set_location_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="set location"
+            android:background="@drawable/common_google_signin_btn_text_dark_normal_background"
+            android:textColor="@color/white"/>
+
+    </TableRow>
+
+</TableLayout>

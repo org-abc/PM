@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:id="@+id/geo_cool_loading_lay"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:elevation="4dp"
+            android:visibility="gone">
+
+        <View
+                android:id="@+id/geo_to_the_left"
+                android:layout_width="20dp"
+                android:layout_height="5dp"
+                android:background="@drawable/sign_up_background"/>
+
+        <View
+                android:id="@+id/geo_to_the_right"
+                android:layout_width="20dp"
+                android:layout_height="5dp"
+                android:background="@drawable/login_background"/>
+
+    </LinearLayout>
+
+</LinearLayout>
