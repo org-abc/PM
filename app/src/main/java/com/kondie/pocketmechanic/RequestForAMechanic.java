@@ -50,7 +50,7 @@ public class RequestForAMechanic extends AsyncTask<String, Void, String> {
             conn.setDoOutput(true);
 
             Uri.Builder builder = new Uri.Builder().appendQueryParameter("comment", params[0])
-                    .appendQueryParameter("orderDetails", params[1])
+                    .appendQueryParameter("makeAndModel", params[1])
                     .appendQueryParameter("issue", params[2])
                     .appendQueryParameter("serviceFee", params[3])
                     .appendQueryParameter("payment", "cash")
@@ -102,11 +102,11 @@ public class RequestForAMechanic extends AsyncTask<String, Void, String> {
             progressDialog.dismiss();
             if (s.split(":")[0].equals("congrats")) {
                 editor = prefs.edit();
-                editor.putString("status", "waiting");
-                editor.putString("orderId", s.split(":")[1]);
+                editor.putString("status", "busy");
+                editor.putString("requestId", s.split(":")[1]);
                 editor.commit();
 //                CastReceiver.setAlarm(MainActivity.activity, "response");
-                new AlertDialog.Builder(RequestForm.activity).setCancelable(false).setMessage("Your delivery guy will be in contact with you in a few minutes")
+                new AlertDialog.Builder(RequestForm.activity).setCancelable(false).setMessage("Your mechanic will be in contact with you in a few minutes")
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

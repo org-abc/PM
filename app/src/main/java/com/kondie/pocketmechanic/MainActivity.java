@@ -12,6 +12,7 @@ import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -55,7 +56,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -103,6 +107,7 @@ public class MainActivity extends AppCompatActivity
     public static String CHANNEL_ID = "0";
     private static final int notifId = 1;
     public static boolean isSelectedShopOpened;
+    private Button trackButt;
 
     private TableRow towing, tires, engine, battery, brakes, electronics, lights;
 
@@ -126,7 +131,9 @@ public class MainActivity extends AppCompatActivity
             setUpToolbar();
 
             coolLoading = new CoolLoading(activity);
+            trackButt = findViewById(R.id.track_mechanic_butt);
 
+            trackButt.setOnClickListener(startTracking);
             setUpOptionList();
 
             if (prefs.getString("orderId", "").equals("")) {
@@ -152,6 +159,19 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(activity, e.toString(), Toast.LENGTH_LONG).show();
         }
     }
+
+    private View.OnClickListener startTracking = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (prefs.getString("status", "").equals("busy")){
+                Intent toNavIntent = new Intent(activity, NavMap.class);
+                activity.startActivity(toNavIntent);
+            }
+            else{
+                Toast.makeText(MainActivity.this, "You don't have any active request", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
     private void setUpToolbar(){
 
@@ -182,6 +202,23 @@ public class MainActivity extends AppCompatActivity
         brakes.setOnClickListener(showForm);
         electronics.setOnClickListener(showForm);
         lights.setOnClickListener(showForm);
+    }
+
+    public static String getImageName(){
+
+        String timeStamp = new SimpleDateFormat("yyyMMdd_HHmmSS").format(new Date());
+        String imageName = "PM_"+"_"+timeStamp;
+
+        return imageName;
+    }
+
+    public static void addPicToGallery(String currentImagePath){
+
+        Intent scanMediaIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File imageFile = new File(currentImagePath);
+        Uri imageUri = Uri.fromFile(imageFile);
+        scanMediaIntent.setData(imageUri);
+        activity.sendBroadcast(scanMediaIntent);
     }
 
     private View.OnClickListener showForm = new View.OnClickListener() {

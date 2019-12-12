@@ -22,7 +22,7 @@ public class SendFeedback extends AsyncTask<String, Void, String> {
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
     private ProgressDialog pDialog;
-    String orderId, driverRating, driverReview, restaurantRating, restaurantReview;
+    String requestId, mechanicRating, mechanicReview;
 
     @Override
     protected void onPreExecute() {
@@ -47,11 +47,9 @@ public class SendFeedback extends AsyncTask<String, Void, String> {
         try {
             prefs = NavMap.activity.getSharedPreferences("PM", Context.MODE_PRIVATE);
             editor = prefs.edit();
-            orderId = params[0];
-            driverRating = params[1];
-            restaurantRating = params[2];
-            driverReview = params[3];
-            restaurantReview = params[4];
+            requestId = params[0];
+            mechanicRating = params[1];
+            mechanicReview = params[2];
 
             URL url = new URL(Constants.PM_HOSTING_WEBSITE + "/sendFeedback.php");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -59,11 +57,9 @@ public class SendFeedback extends AsyncTask<String, Void, String> {
             conn.setDoOutput(true);
             conn.setDoInput(true);
 
-            Uri.Builder builder = new Uri.Builder().appendQueryParameter("orderId", params[0])
-                    .appendQueryParameter("driverRating", params[1])
-                    .appendQueryParameter("restaurantRating", params[2])
-                    .appendQueryParameter("driverReview", params[3])
-                    .appendQueryParameter("restaurantReview", params[4]);
+            Uri.Builder builder = new Uri.Builder().appendQueryParameter("reqId", params[0])
+                    .appendQueryParameter("mechanicRating", params[1])
+                    .appendQueryParameter("mechanicReview", params[2]);
             String query = builder.build().getEncodedQuery();
 
             OutputStream outStream = conn.getOutputStream();
@@ -113,7 +109,7 @@ public class SendFeedback extends AsyncTask<String, Void, String> {
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                new SendFeedback().execute(orderId, driverRating, restaurantRating, driverReview, restaurantReview);
+                                new SendFeedback().execute(requestId, mechanicRating, mechanicReview);
                             }
                         })
                         .setNegativeButton("no", new DialogInterface.OnClickListener() {

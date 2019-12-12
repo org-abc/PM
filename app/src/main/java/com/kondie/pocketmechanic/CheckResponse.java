@@ -33,7 +33,7 @@ public class CheckResponse extends AsyncTask<String, Void,String> {
 
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
-    private String userEmail, orderId;
+    private String userEmail, requestId;
 
     @Override
     protected String doInBackground(String... params) {
@@ -42,14 +42,14 @@ public class CheckResponse extends AsyncTask<String, Void,String> {
             prefs = MainActivity.activity.getSharedPreferences("PM", Context.MODE_PRIVATE);
             editor = prefs.edit();
             userEmail = prefs.getString("email", "");
-            orderId = prefs.getString("orderId", "");
+            requestId = prefs.getString("requestId", "");
             URL url = new URL(Constants.PM_HOSTING_WEBSITE + "/checkResponse.php");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
             conn.setDoInput(true);
 
-            Uri.Builder builder = new Uri.Builder().appendQueryParameter("orderId", prefs.getString("orderId", ""));
+            Uri.Builder builder = new Uri.Builder().appendQueryParameter("requestId", requestId);
             String query = builder.build().getEncodedQuery();
 
             OutputStream outStream = conn.getOutputStream();
@@ -90,10 +90,10 @@ public class CheckResponse extends AsyncTask<String, Void,String> {
         try {
             NavMap.startCheckingForDriverResponse(s.split(":")[0]);
             if (s.split(":").length >= 2){
-                if (s.split(":")[0].equals("delivered") || s.split(":")[0].equals("cancel")){
+                if (s.split(":")[0].equals("arrived") || s.split(":")[0].equals("canceled")){
                     SharedPreferences.Editor editor = prefs.edit();
-                    editor.putString("driverEmail", "");
-                    editor.putString("orderId", "");
+                    editor.putString("mechanicEmail", "");
+                    editor.putString("requestId", "");
                     editor.commit();
 
                     AlertDialog.Builder alertBuilder = new AlertDialog.Builder(NavMap.activity).setCancelable(false)
@@ -104,12 +104,12 @@ public class CheckResponse extends AsyncTask<String, Void,String> {
                                     showReviewDialog();
                                 }
                             });
-                    if (s.split(":")[0].equals("delivered")){
+                    if (s.split(":")[0].equals("arrived")){
                         CastReceiver.stopAlarm(MainActivity.activity, "response");
-                        alertBuilder.setTitle("Delivered").setMessage("This order was delivered. Enjoy your food :)").show();
+                        alertBuilder.setTitle("Delivered").setMessage("Your mechanic arrived").show();
                     }
-                    else if (s.split(":")[0].equals("cancel")){
-                        alertBuilder.setTitle("Canceled").setMessage("This order was canceled :(").show();
+                    else if (s.split(":")[0].equals("canceled")){
+                        alertBuilder.setTitle("Canceled").setMessage("This request was canceled :(").show();
                     }
                 }
                 else {
@@ -118,11 +118,11 @@ public class CheckResponse extends AsyncTask<String, Void,String> {
                     for (int c = 0; c < jsonArr.length(); c++) {
                         JSONObject jsonOb = jsonArr.getJSONObject(c);
 
-                        editor.putString("driverEmail", jsonOb.getString("email"));
-                        editor.putFloat("driverLat", (float) jsonOb.getDouble("lat"));
-                        editor.putFloat("driverLng", (float) jsonOb.getDouble("lng"));
-                        editor.putString("driverImagePath", jsonOb.getString("image_path"));
-                        editor.putString("driverPhone", jsonOb.getString("phone"));
+                        editor.putString("mechanicEmail", jsonOb.getString("email"));
+                        editor.putFloat("mechanicLat", (float) jsonOb.getDouble("lat"));
+                        editor.putFloat("mechanicLng", (float) jsonOb.getDouble("lng"));
+                        editor.putString("mechanicImagePath", jsonOb.getString("image_path"));
+                        editor.putString("mechanicPhone", jsonOb.getString("phone"));
                         editor.commit();
                         NavMap.driverLat = (float) jsonOb.getDouble("lat");
                         NavMap.driverLng = (float) jsonOb.getDouble("lng");
@@ -143,15 +143,13 @@ public class CheckResponse extends AsyncTask<String, Void,String> {
             ratingDialog.setContentView(R.layout.rating_dialog);
 
             TextView submitRatingButt = ratingDialog.findViewById(R.id.submit_rating);
-            final EditText driverComment = ratingDialog.findViewById(R.id.driver_review);
-            final EditText restaurantComment = ratingDialog.findViewById(R.id.restaurant_review);
-            final RatingBar driverRating = ratingDialog.findViewById(R.id.driver_rating);
-            final RatingBar restaurantRating = ratingDialog.findViewById(R.id.restaurant_rating);
+            final EditText mechanicComment = ratingDialog.findViewById(R.id.mechanic_review);
+            final RatingBar mechanicRating = ratingDialog.findViewById(R.id.mechanic_rating);
 
             submitRatingButt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new SendFeedback().execute(orderId, String.valueOf(driverRating.getRating()), String.valueOf(restaurantRating.getRating()), driverComment.getText().toString(), restaurantComment.getText().toString());
+                    new SendFeedback().execute(requestId, String.valueOf(mechanicRating.getRating()), mechanicComment.getText().toString());
                     ratingDialog.dismiss();
                 }
             });

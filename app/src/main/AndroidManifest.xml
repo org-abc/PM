@@ -112,6 +112,17 @@
                 android:value=".MainActivity"/>
         </activity>
         <activity android:name=".ForgotPassword"/>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.pocketmechanic.kondie.pocketmechanic.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path"></meta-data>
+        </provider>
+
     </application>
 
 </manifest>
