@@ -58,7 +58,7 @@ public class UpdateLocationService extends IntentService {
             conn.setDoOutput(true);
             conn.setDoInput(true);
 
-            Uri.Builder builder = new Uri.Builder().appendQueryParameter("driverEmail", prefs.getString("driverEmail", ""))
+            Uri.Builder builder = new Uri.Builder().appendQueryParameter("mechanicEmail", prefs.getString("mechanicEmail", ""))
                     .appendQueryParameter("userEmail", prefs.getString("email", ""))
                     .appendQueryParameter("lat",  String.valueOf(MainActivity.userLocation.getLatitude()))
                     .appendQueryParameter("lng", String.valueOf(MainActivity.userLocation.getLongitude()));
@@ -88,11 +88,11 @@ public class UpdateLocationService extends IntentService {
                 if (!result.equals("null")) {
                     JSONObject locOb = new JSONObject(result.toString());
                     SharedPreferences.Editor editor = prefs.edit();
-                    editor.putFloat("driverLat", (float) locOb.getDouble("lat"));
-                    editor.putFloat("driverLng", (float) locOb.getDouble("lng"));
+                    editor.putFloat("mechanicLat", (float) locOb.getDouble("lat"));
+                    editor.putFloat("mechanicLng", (float) locOb.getDouble("lng"));
                     editor.commit();
-                    NavMap.driverLat = (float) locOb.getDouble("lat");
-                    NavMap.driverLng = (float) locOb.getDouble("lng");
+                    NavMap.mechanicLat = (float) locOb.getDouble("lat");
+                    NavMap.mechanicLng = (float) locOb.getDouble("lng");
                     NavMap.updateLoc();
                 }
             } else {

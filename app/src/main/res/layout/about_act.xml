@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="15dp"
-            android:text="@string/about_skopo"
+            android:text="@string/about_pm"
             android:textColor="@color/black"
             android:textSize="16dp"
             android:fontFamily="serif-monospace"/>

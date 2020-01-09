@@ -88,7 +88,9 @@ public class CheckResponse extends AsyncTask<String, Void,String> {
         super.onPostExecute(s);
 
         try {
-            NavMap.startCheckingForDriverResponse(s.split(":")[0]);
+            if (NavMap.mechanicDp.getVisibility() == View.GONE) {
+                NavMap.startCheckingForMechanicResponse(s.split(":")[0]);
+            }
             if (s.split(":").length >= 2){
                 if (s.split(":")[0].equals("arrived") || s.split(":")[0].equals("canceled")){
                     SharedPreferences.Editor editor = prefs.edit();
@@ -124,8 +126,8 @@ public class CheckResponse extends AsyncTask<String, Void,String> {
                         editor.putString("mechanicImagePath", jsonOb.getString("image_path"));
                         editor.putString("mechanicPhone", jsonOb.getString("phone"));
                         editor.commit();
-                        NavMap.driverLat = (float) jsonOb.getDouble("lat");
-                        NavMap.driverLng = (float) jsonOb.getDouble("lng");
+                        NavMap.mechanicLat = (float) jsonOb.getDouble("lat");
+                        NavMap.mechanicLng = (float) jsonOb.getDouble("lng");
                         NavMap.updateLoc();
                     }
                 }

@@ -44,12 +44,12 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
     static SharedPreferences prefs;
     private final int EQUATOR_LENGTH = 40075000;
     public static Activity activity;
-    public static String driverName;
-    public static Float driverLat, driverLng;
-    public static LatLng driverLatLng;
+    public static String mechanicName;
+    public static Float mechanicLat, mechanicLng;
+    public static LatLng mechanicLatLng;
     SharedPreferences.Editor editor;
-    static Marker clientMarker, driverMarker;
-    private static ImageView callDriverFb, driverDp;
+    static Marker clientMarker, mechanicMarker;
+    public static ImageView callMechanicFb, mechanicDp;
     private static ProgressBar navMapLoader;
     private ImageView backButt;
     private static String resp;
@@ -71,13 +71,13 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
             backButt = findViewById(R.id.back_from_nav);
             SupportMapFragment mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.nav_map_frag);
             mapFrag.getMapAsync(NavMap.this);
-            driverLat = (float) 0.0;
-            driverLng = (float) 0.0;
-            callDriverFb = findViewById(R.id.call_driver_fb);
-            driverDp = findViewById(R.id.driver_dp);
+            mechanicLat = (float) 0.0;
+            mechanicLng = (float) 0.0;
+            callMechanicFb = findViewById(R.id.call_mechanic_fb);
+            mechanicDp = findViewById(R.id.mechanic_dp);
             navMapLoader = findViewById(R.id.nav_map_loader);
 
-            callDriverFb.setOnClickListener(callDriver);
+            callMechanicFb.setOnClickListener(callMechanic);
             backButt.setOnClickListener(goBack);
         }catch (Exception e){
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
@@ -91,11 +91,11 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
         }
     };
 
-    private View.OnClickListener callDriver = new View.OnClickListener() {
+    private View.OnClickListener callMechanic = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent callIntent = new Intent(Intent.ACTION_DIAL);
-            callIntent.setData(Uri.parse("tel:" + prefs.getString("driverPhone", "")));
+            callIntent.setData(Uri.parse("tel:" + prefs.getString("mechanicPhone", "")));
             startActivity(callIntent);
         }
     };
@@ -150,10 +150,10 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
     public static void updateLoc(){
 
         navGoogleMap.clear();
-        driverLatLng = new LatLng(driverLat, driverLng);
+        mechanicLatLng = new LatLng(mechanicLat, mechanicLng);
         clientMarker.setPosition(MainActivity.dropOffLoc);
-        driverMarker = navGoogleMap.addMarker(new MarkerOptions().position(driverLatLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.small_taxi)));
-        driverMarker.setPosition(driverLatLng);
+        mechanicMarker = navGoogleMap.addMarker(new MarkerOptions().position(mechanicLatLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.small_taxi)));
+        mechanicMarker.setPosition(mechanicLatLng);
         setUpMarkersAndDirections();
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -197,7 +197,7 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
         return super.onOptionsItemSelected(item);
     }
 
-    public static void startCheckingForDriverResponse(String response){
+    public static void startCheckingForMechanicResponse(String response){
 
         resp = response;
         if (response.equalsIgnoreCase("decline")){
@@ -209,13 +209,13 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
                         }
                     }).show();
         }else if (response.equalsIgnoreCase("accept")) {
+
             try {
-                Picasso.with(activity).load(prefs.getString("driverImagePath", "")).into(driverDp);
-            }catch (Exception e){
-                Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show();
+                Picasso.with(activity).load(prefs.getString("mechanicImagePath", "")).into(mechanicDp);
+            } catch (Exception e) {
             }
-            driverDp.setVisibility(View.VISIBLE);
-            callDriverFb.setVisibility(View.VISIBLE);
+            mechanicDp.setVisibility(View.VISIBLE);
+            callMechanicFb.setVisibility(View.VISIBLE);
             navMapLoader.setVisibility(View.GONE);
         }else{
             new Handler().postDelayed(new Runnable() {
@@ -232,10 +232,10 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
 //        if (lineOptions != null){
 //            navGoogleMap.addPolyline(lineOptions);
 //        }
-        driverLatLng = new LatLng(driverLat, driverLng);
+        mechanicLatLng = new LatLng(mechanicLat, mechanicLng);
         clientMarker = navGoogleMap.addMarker(new MarkerOptions().position(MainActivity.dropOffLoc).icon(BitmapDescriptorFactory.fromResource(R.drawable.map_user)));
         navGoogleMap.addMarker(new MarkerOptions().position(new LatLng(prefs.getFloat("shopLat", (float)0), prefs.getFloat("shopLng", (float) 0))).title("Restaurant"));
-//        new GetDirections().execute(driverLat, driverLng, prefs.getFloat("shopLat", (float)0), prefs.getFloat("shopLng", (float) 0), (float) 0);
+//        new GetDirections().execute(mechanicLat, mechanicLng, prefs.getFloat("shopLat", (float)0), prefs.getFloat("shopLng", (float) 0), (float) 0);
 //        new GetDirections().execute(prefs.getFloat("shopLat", (float)0), prefs.getFloat("shopLng", (float) 0), (float) MainActivity.dropOffLoc.latitude, (float) MainActivity.dropOffLoc.longitude, (float) 1);
     }
 
@@ -250,9 +250,9 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
             clientMarker = navGoogleMap.addMarker(new MarkerOptions().position(MainActivity.dropOffLoc).icon(BitmapDescriptorFactory.fromResource(R.drawable.map_user)));
             navGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(MainActivity.dropOffLoc, 15));
 
-            editor.putFloat("driverLat", driverLat);
-            editor.putFloat("driverLng", driverLng);
-            editor.putString("driverName", driverName);
+            editor.putFloat("mechanicLat", mechanicLat);
+            editor.putFloat("mechanicLng", mechanicLng);
+            editor.putString("mechanicName", mechanicName);
             editor.putString("navStatus", "active");
             editor.commit();
             new CheckResponse().execute();
