@@ -2,8 +2,10 @@ package com.kondie.pocketmechanic;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -36,12 +38,14 @@ public class RequestForm extends AppCompatActivity {
     private EditText reqComment, reqMakeAndModel;
     private TextView reqButt;
     private int serviceFee;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.request_form);
         activity = this;
+        prefs = getSharedPreferences("PM", Context.MODE_PRIVATE);
 
         setUpToolbar();
         reqPic = findViewById(R.id.req_pic);
@@ -58,24 +62,28 @@ public class RequestForm extends AppCompatActivity {
         @Override
         public void onClick(View view) {
 
-            if (!reqMakeAndModel.getText().toString().equalsIgnoreCase("")) {
-                new AlertDialog.Builder(activity).setCancelable(false).setTitle("Are you sure you want a mechanic?").setMessage("This will cost you at least R" + serviceFee)
-                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                new RequestForAMechanic().execute(reqComment.getText().toString(), reqMakeAndModel.getText().toString(), getIntent().getExtras().getString("issue"), String.valueOf(serviceFee));
-                                dialogInterface.dismiss();
-                            }
-                        })
-                        .setNegativeButton("no", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        }).show();
+            if (!prefs.getString("status", "").equalsIgnoreCase("busy")) {
+                if (!reqMakeAndModel.getText().toString().equalsIgnoreCase("")) {
+                    new AlertDialog.Builder(activity).setCancelable(false).setTitle("Are you sure you want a mechanic?").setMessage("This will cost you at least R" + serviceFee)
+                            .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    new RequestForAMechanic().execute(reqComment.getText().toString(), reqMakeAndModel.getText().toString(), getIntent().getExtras().getString("issue"), String.valueOf(serviceFee));
+                                    dialogInterface.dismiss();
+                                }
+                            })
+                            .setNegativeButton("no", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            }).show();
+                } else {
+                    Snackbar.make(view, "Please fill in the make and model of your car", Snackbar.LENGTH_LONG).show();
+                }
             }
             else{
-                Snackbar.make(view, "Please fill in the make and model of your car", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, "You already have an active request", Snackbar.LENGTH_LONG).show();
             }
         }
     };

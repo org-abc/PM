@@ -107,8 +107,12 @@ public class CheckResponse extends AsyncTask<String, Void,String> {
                                 }
                             });
                     if (s.split(":")[0].equals("arrived")){
+                        editor.putString("driverEmail", "");
+                        editor.putString("requestId", "");
+                        editor.putString("status", "free");
+                        editor.commit();
                         CastReceiver.stopAlarm(MainActivity.activity, "response");
-                        alertBuilder.setTitle("Delivered").setMessage("Your mechanic arrived").show();
+                        alertBuilder.setTitle("Arrived").setMessage("Your mechanic arrived").show();
                     }
                     else if (s.split(":")[0].equals("canceled")){
                         alertBuilder.setTitle("Canceled").setMessage("This request was canceled :(").show();

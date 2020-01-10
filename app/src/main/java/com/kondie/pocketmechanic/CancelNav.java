@@ -92,8 +92,10 @@ public class CancelNav extends AsyncTask<Void, Void, String> {
             Toast.makeText(NavMap.activity, "Order canceled", Toast.LENGTH_SHORT).show();
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("driverEmail", "");
-            editor.putString("orderId", "");
+            editor.putString("requestId", "");
+            editor.putString("status", "free");
             editor.commit();
+
             NavMap.activity.finish();
         }else if (s.equalsIgnoreCase("sorry")){
             Toast.makeText(NavMap.activity, "You can't cancel a request after it has been accepted", Toast.LENGTH_SHORT).show();

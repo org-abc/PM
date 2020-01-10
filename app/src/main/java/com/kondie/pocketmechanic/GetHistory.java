@@ -116,6 +116,8 @@ public class GetHistory extends AsyncTask<String, Void, String> {
                 item.setOrderAmount(request.getString("min_service_fee"));
                 item.setDateCreated(request.getString("date_created"));
                 item.setStatus(request.getString("status"));
+                item.setIssue(request.getString("issue"));
+                item.setServiceFee(request.getString("min_service_fee"));
                 item.setId(String.valueOf(request.getInt("id")));
 
                 item.setOrderName("issue");

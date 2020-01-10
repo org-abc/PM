@@ -119,9 +119,8 @@ public class MainActivity extends AppCompatActivity
         editor = prefs.edit();
         setContentView(R.layout.activity_main);
         try {
-            if (prefs.getString("fname", "").equals("")) {
-                new GetUserInfo().execute();
-            } else {
+            new GetUserInfo().execute();
+            if (!prefs.getString("fname", "").equals("")) {
                 setUserDrawerInfo((NavigationView) findViewById(R.id.nav_view));
             }
 

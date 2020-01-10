@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -79,12 +81,27 @@ public class GetUserInfo extends AsyncTask<String, Void, String> {
         super.onPostExecute(s);
 
         try {
-            JSONObject userOb = new JSONObject(s);
+            JSONObject allData = new JSONObject(s);
+            String userStr = allData.getString("user");
+            String reqStr = allData.getString("req");
+
+            JSONObject userOb = new JSONObject(userStr);
             editor.putString("fname", userOb.getString("fname"));
             editor.putString("lname", userOb.getString("lname"));
             editor.putString("imagePath", userOb.getString("image_path"));
             editor.putString("phone", userOb.getString("phone"));
             editor.putString("email", userOb.getString("email"));
+
+            if (!reqStr.equalsIgnoreCase("empty")){
+                JSONObject reqOb = new JSONObject(reqStr);
+                editor.putString("status", "busy");
+                editor.putString("requestId", String.valueOf(reqOb.getInt("id")));
+            }
+            else{
+                editor.putString("driverEmail", "");
+                editor.putString("requestId", "");
+                editor.putString("status", "free");
+            }
             editor.commit();
             MainActivity.setUserDrawerInfo((NavigationView) MainActivity.activity.findViewById(R.id.nav_view));
         } catch (Exception e) {

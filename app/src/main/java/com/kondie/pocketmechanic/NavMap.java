@@ -149,12 +149,11 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
 
     public static void updateLoc(){
 
-        navGoogleMap.clear();
+//        navGoogleMap.clear();
         mechanicLatLng = new LatLng(mechanicLat, mechanicLng);
         clientMarker.setPosition(MainActivity.dropOffLoc);
-        mechanicMarker = navGoogleMap.addMarker(new MarkerOptions().position(mechanicLatLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.small_taxi)));
         mechanicMarker.setPosition(mechanicLatLng);
-        setUpMarkersAndDirections();
+//        setUpMarkersAndDirections();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -247,6 +246,8 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
             setMapType();
 
             navGoogleMap.setMyLocationEnabled(true);
+            mechanicLatLng = new LatLng(mechanicLat, mechanicLng);
+            mechanicMarker = navGoogleMap.addMarker(new MarkerOptions().position(mechanicLatLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.small_taxi)));
             clientMarker = navGoogleMap.addMarker(new MarkerOptions().position(MainActivity.dropOffLoc).icon(BitmapDescriptorFactory.fromResource(R.drawable.map_user)));
             navGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(MainActivity.dropOffLoc, 15));
 

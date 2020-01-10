@@ -2,13 +2,13 @@ package com.kondie.pocketmechanic;
 
 public class HistoryItem {
 
-    String driverName, orderDetails, orderAmount, deliveryFee, dateCreated, id, shopName, status, orderName;
-    double lat, lng, shopLat, shopLng;
+    String mechanicName, issue, orderAmount, serviceFee, dateCreated, id, status, orderName;
+    double lat, lng, shopLng;
 
     public HistoryItem(){}
 
-    public void setDeliveryFee(String deliveryFee) {
-        this.deliveryFee = deliveryFee;
+    public void setDeliveryFee(String serviceFee) {
+        this.serviceFee = serviceFee;
     }
 
     public void setStatus(String status) {
@@ -19,8 +19,28 @@ public class HistoryItem {
         return status;
     }
 
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
+    public String getIssue() {
+        return issue;
+    }
+
+    public String getMechanicName() {
+        return mechanicName;
+    }
+
+    public String getServiceFee() {
+        return serviceFee;
+    }
+
+    public void setIssue(String issue) {
+        this.issue = issue;
+    }
+
+    public void setMechanicName(String mechanicName) {
+        this.mechanicName = mechanicName;
+    }
+
+    public void setServiceFee(String serviceFee) {
+        this.serviceFee = serviceFee;
     }
 
     public void setOrderName(String orderName) {
@@ -35,20 +55,8 @@ public class HistoryItem {
         this.id = id;
     }
 
-    public void setShopLat(double shopLat) {
-        this.shopLat = shopLat;
-    }
-
-    public void setShopLng(double shopLng) {
-        this.shopLng = shopLng;
-    }
-
     public void setDateCreated(String dateCreated) {
         this.dateCreated = dateCreated;
-    }
-
-    public void setOrderDetails(String orderDetails) {
-        this.orderDetails = orderDetails;
     }
 
     public void setOrderAmount(String orderAmount) {
@@ -63,21 +71,8 @@ public class HistoryItem {
         this.lat = lat;
     }
 
-    public void setDriverName(String driverName) {
-        this.driverName = driverName;
-    }
-
-
-    public String getDeliveryFee() {
-        return deliveryFee;
-    }
-
-    public double getShopLat() {
-        return shopLat;
-    }
-
-    public String getShopName() {
-        return shopName;
+    public void setDriverName(String mechanicName) {
+        this.mechanicName = mechanicName;
     }
 
     public String getId() {
@@ -90,10 +85,6 @@ public class HistoryItem {
 
     public String getDateCreated() {
         return dateCreated;
-    }
-
-    public String getOrderDetails() {
-        return orderDetails;
     }
 
     public String getOrderAmount() {
@@ -109,7 +100,7 @@ public class HistoryItem {
     }
 
     public String getDriverName() {
-        return driverName;
+        return mechanicName;
     }
 
 }
