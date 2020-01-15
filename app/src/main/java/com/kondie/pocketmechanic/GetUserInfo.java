@@ -105,6 +105,7 @@ public class GetUserInfo extends AsyncTask<String, Void, String> {
             editor.commit();
             MainActivity.setUserDrawerInfo((NavigationView) MainActivity.activity.findViewById(R.id.nav_view));
         } catch (Exception e) {
+//            Toast.makeText(MainActivity.activity, e.toString() + s, Toast.LENGTH_LONG).show();
         }
     }
 }
