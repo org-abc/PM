@@ -33,7 +33,7 @@ public class RequestForAMechanic extends AsyncTask<String, Void, String> {
     protected void onPreExecute() {
         super.onPreExecute();
         progressDialog = new ProgressDialog(RequestForm.activity);
-        progressDialog.setTitle("Placing order...");
+        progressDialog.setTitle("Sending request...");
         progressDialog.setCancelable(false);
         progressDialog.show();
     }

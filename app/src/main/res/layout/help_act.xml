@@ -26,26 +26,27 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:text="Contact info"
-                android:textSize="25sp"
-                android:fontFamily="sans-serif-smallcaps"
+                android:textSize="30sp"
+                android:gravity="center_horizontal"
                 android:textStyle="bold"
-                android:textColor="@color/black"/>
+                android:textColor="@color/blue_grey"/>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/grey"
-                android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp"/>
+                android:layout_height="3dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginLeft="50dp"
+                android:background="@drawable/whitey"
+                android:layout_marginBottom="20dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Email:"
+                android:text="EMAIL:"
+                android:textColor="@color/black"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:textSize="20sp"/>
+                android:layout_marginTop="15dp"/>
 
             <TextView
                 android:id="@+id/mph_email"
@@ -56,17 +57,16 @@
                 android:layout_marginTop="10dp"
                 android:inputType="textEmailAddress"
                 android:text="@string/mph_email"
-                android:textColor="@color/light_blue"
-                android:textSize="18dp" />
+                android:textColor="@color/light_blue" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cell:"
+                android:text="CELL:"
+                android:textColor="@color/black"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:textSize="20sp"/>
+                android:layout_marginTop="15dp"/>
 
             <TextView
                 android:id="@+id/mph_cell_numbers"
@@ -74,7 +74,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/mph_cell"
                 android:layout_marginLeft="35dp"
-                android:textSize="18dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
                 android:textColor="@color/light_blue"
@@ -83,19 +82,19 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Physical address:"
+                android:text="PHYSICAL ADDRESS:"
+                android:textColor="@color/black"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:textSize="20sp"/>
+                android:layout_marginTop="15dp"/>
 
             <TextView
                 android:id="@+id/physical_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/physical_address"
+                android:gravity=""
                 android:layout_marginLeft="35dp"
-                android:textSize="18dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
                 android:textColor="@color/light_blue"

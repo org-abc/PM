@@ -36,7 +36,7 @@ public class RequestForm extends AppCompatActivity {
     final int TAKE_IMAGE_CODE = 0;
     private ImageView reqPic;
     private EditText reqComment, reqMakeAndModel;
-    private TextView reqButt;
+    private TextView reqButt, selectedIssue;
     private int serviceFee;
     private SharedPreferences prefs;
 
@@ -49,11 +49,13 @@ public class RequestForm extends AppCompatActivity {
 
         setUpToolbar();
         reqPic = findViewById(R.id.req_pic);
+        selectedIssue = findViewById(R.id.selected_issue);
         reqComment = findViewById(R.id.req_comment);
         reqMakeAndModel = findViewById(R.id.req_car_make_and_model);
         reqButt = findViewById(R.id.request_for_mechanic_butt);
         serviceFee = 100;
 
+        selectedIssue.setText(getIntent().getExtras().getString("issue"));
         reqPic.setOnClickListener(openCamera);
         reqButt.setOnClickListener(sendRequest);
     }
