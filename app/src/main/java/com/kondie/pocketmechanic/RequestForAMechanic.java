@@ -100,7 +100,9 @@ public class RequestForAMechanic extends AsyncTask<String, Void, String> {
 
         try{
             progressDialog.dismiss();
-            if (s.split(":")[0].equals("congrats")) {
+            if (s.equals("outOfRange")){
+                Toast.makeText(RequestForm.activity, "You're out of range for our services. SORRY", Toast.LENGTH_LONG).show();
+            } else if (s.split(":")[0].equals("congrats")) {
                 editor = prefs.edit();
                 editor.putString("status", "busy");
                 editor.putString("requestId", s.split(":")[1]);

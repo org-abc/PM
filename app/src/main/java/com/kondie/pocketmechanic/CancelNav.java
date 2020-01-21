@@ -23,7 +23,7 @@ import java.net.URL;
 public class CancelNav extends AsyncTask<Void, Void, String> {
 
     SharedPreferences prefs;
-    private String orderId;
+    private String requestId;
     ProgressDialog pDialog;
 
     @Override
@@ -42,14 +42,14 @@ public class CancelNav extends AsyncTask<Void, Void, String> {
 
         try {
             prefs = MainActivity.activity.getSharedPreferences("PM", Context.MODE_PRIVATE);
-            orderId = prefs.getString("orderId", "");
+            requestId = prefs.getString("requestId", "");
             URL url = new URL(Constants.PM_HOSTING_WEBSITE + "/cancelReq.php");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
             conn.setDoInput(true);
 
-            Uri.Builder builder = new Uri.Builder().appendQueryParameter("orderId", orderId);
+            Uri.Builder builder = new Uri.Builder().appendQueryParameter("requestId", requestId);
             String query = builder.build().getEncodedQuery();
 
             OutputStream outStream = conn.getOutputStream();
@@ -101,7 +101,7 @@ public class CancelNav extends AsyncTask<Void, Void, String> {
             Toast.makeText(NavMap.activity, "You can't cancel a request after it has been accepted", Toast.LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(NavMap.activity, "Something went wrong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(NavMap.activity, "Something went wrong" + s, Toast.LENGTH_SHORT).show();
         }
     }
 }

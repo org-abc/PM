@@ -80,7 +80,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryHolder> implemen
             holder.driverName.setText(item.getDriverName());
             holder.deliveryFee.setText("Service fee: R" + item.getServiceFee());
             holder.issue.setText(item.getIssue() + " problem");
-            if (item.getStatus().equals("cancel")){
+            if (item.getStatus().equals("cancel") || item.getStatus().equals("canceled")){
                 holder.status.setText("canceled");
                 holder.status.setTextColor(activity.getResources().getColor(R.color.red));
             }else {
