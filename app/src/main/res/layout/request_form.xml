@@ -27,17 +27,20 @@
                 android:textColor="@color/blue_grey"
                 android:gravity="center_horizontal"
                 android:textSize="30sp"
+                android:background="@drawable/colourful_surounding"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginRight="50dp"
                 android:layout_marginLeft="50dp"
-                android:background="@drawable/whitey"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"
+                android:elevation="4dp"
+                android:layout_marginRight="50dp"/>
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="3dp"-->
+<!--                android:layout_marginRight="50dp"-->
+<!--                android:layout_marginLeft="50dp"-->
+<!--                android:background="@drawable/whitey"-->
+<!--                android:layout_marginBottom="20dp"/>-->
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -110,11 +113,12 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:gravity="center"
-                android:text="Request for a mechanic"
+                android:text="REQUEST FOR A MECHANIC"
                 android:background="@drawable/green_backg"
                 android:padding="10dp"
                 android:textColor="@color/white"
-                android:layout_margin="10dp"/>
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"/>
 
         </LinearLayout>
 
