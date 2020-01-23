@@ -54,6 +54,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity
         ActivityCompat.OnRequestPermissionsResultCallback,
         PermissionUtils.PermissionResultCallback{
 
-    private static final String ACTION_DELETE_NOTIFICATION = "ACTION_DELETE_NOTIFICATION";
+    public static final String ACTION_DELETE_NOTIFICATION = "ACTION_DELETE_NOTIFICATION";
     public static Activity activity;
     static SharedPreferences prefs;
     public static String selectedShopImagePath;
@@ -101,8 +103,10 @@ public class MainActivity extends AppCompatActivity
     public static LatLng dropOffLoc;
     ProgressBar fullMapLoading;
     private PermissionUtils permissionUtils;
-    public static String CHANNEL_ID = "0";
-    private static final int notifId = 1;
+    public static final String CHANNEL_ID = "0";
+    public static final String CHANNEL_NAME = "pm channel";
+    public static final String CHANNEL_DESC = "Notification Channel";
+    public static final int NOTIF_ID = 1;
     public static boolean isSelectedShopOpened;
     private Button trackButt;
 
@@ -116,7 +120,7 @@ public class MainActivity extends AppCompatActivity
         editor = prefs.edit();
         setContentView(R.layout.activity_main);
         try {
-            new GetUserInfo().execute();
+            sendTokenAndGetUserInfo();
             if (!prefs.getString("fname", "").equals("")) {
                 setUserDrawerInfo((NavigationView) findViewById(R.id.nav_view));
             }
@@ -154,6 +158,22 @@ public class MainActivity extends AppCompatActivity
         }catch (NullPointerException e){
             Toast.makeText(activity, e.toString(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void sendTokenAndGetUserInfo(){
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+
+                if (task.isSuccessful()){
+                    new GetUserInfo().execute(task.getResult().getToken());
+                }
+                else{
+                    new GetUserInfo().execute("");
+                }
+            }
+        });
     }
 
     private View.OnClickListener startTracking = new View.OnClickListener() {
@@ -272,28 +292,6 @@ public class MainActivity extends AppCompatActivity
             // or other notification behaviors after this
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
-        }
-    }
-
-    public static void sendNotif(String tittle, String contentText, String contentInfo){
-        try {
-            Intent toMainIntent = new Intent(activity, MainActivity.class);
-            toMainIntent.putExtra("track", "yes");
-            PendingIntent toMainPIntent = PendingIntent.getActivity(activity, notifId, toMainIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            NotificationCompat.Builder notif = new NotificationCompat.Builder(activity, MainActivity.CHANNEL_ID);
-            notif.setContentTitle(tittle)
-                    .setContentText(contentText)
-                    .setAutoCancel(true)
-                    .setSmallIcon(R.drawable.mph_icon)
-                    .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                    .setContentInfo(contentInfo)
-                    .setContentIntent(toMainPIntent)
-                    .setDeleteIntent(getDeleteIntent(activity));
-
-            NotificationManager notifMan = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
-            notifMan.notify(notifId, notif.build());
-        }catch (Exception e){
-            Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 

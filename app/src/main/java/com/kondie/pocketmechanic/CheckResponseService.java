@@ -95,12 +95,6 @@ public class CheckResponseService extends IntentService {
                             }).show();
                 }else if (s.split(":").length >= 2 && (response.equalsIgnoreCase("accept") || response.equalsIgnoreCase("delivered"))){
 
-                    if (response.equalsIgnoreCase("accept") && prefs.getString("driverEmail", "").equals("")) {
-                        MainActivity.sendNotif("Delivery Accepted", "Your delivery is on the way", "Tap for more info");
-                    }else if (response.equalsIgnoreCase("delivered") && !prefs.getString("driverEmail", "").equals("")){
-                        MainActivity.sendNotif("Delivery arrived", "Your delivery has arrived", "Tap for more info");
-                    }
-
                     if (prefs.getString("driverEmail", "").equals("")) {
                         String jsonStr = s.substring(s.indexOf(":") + 1);
                         JSONArray jsonArr = new JSONArray(jsonStr);
