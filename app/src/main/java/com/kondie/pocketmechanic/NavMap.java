@@ -174,7 +174,7 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
         switch (item.getItemId()){
             case R.id.cancel_nav:
 //                if (!resp.equals("accept")){
-                    new AlertDialog.Builder(NavMap.activity).setCancelable(false).setMessage("Are you sure you want to cancel this order?")
+                    new AlertDialog.Builder(NavMap.activity).setCancelable(false).setMessage("Are you sure you want to cancel this request?")
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -207,7 +207,7 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
                             activity.finish();
                         }
                     }).show();
-        }else if (response.equalsIgnoreCase("accept")) {
+        }else if (response.equalsIgnoreCase("accept") || response.equalsIgnoreCase("arrived")) {
 
             try {
                 Picasso.with(activity).load(prefs.getString("mechanicImagePath", "")).into(mechanicDp);

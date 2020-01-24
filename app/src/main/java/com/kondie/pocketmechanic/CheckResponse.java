@@ -89,7 +89,7 @@ public class CheckResponse extends AsyncTask<String, Void,String> {
 
         try {
             if (s.split(":").length >= 2){
-                if (s.split(":")[0].equals("arrived") || s.split(":")[0].equals("canceled")){
+                if (s.split(":")[0].equals("done") || s.split(":")[0].equals("canceled")){
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putString("mechanicEmail", "");
                     editor.putString("requestId", "");
@@ -103,7 +103,7 @@ public class CheckResponse extends AsyncTask<String, Void,String> {
                                     showReviewDialog();
                                 }
                             });
-                    if (s.split(":")[0].equals("arrived")){
+                    if (s.split(":")[0].equals("done")){
                         editor.putString("driverEmail", "");
                         editor.putString("requestId", "");
                         editor.putString("status", "free");
@@ -133,11 +133,11 @@ public class CheckResponse extends AsyncTask<String, Void,String> {
                     }
                 }
             }
+            if (NavMap.mechanicDp.getVisibility() == View.GONE) {
+                NavMap.startCheckingForMechanicResponse(s.split(":")[0]);
+            }
         }catch (Exception e){
 //            Toast.makeText(NavMap.activity, "++++=" + e.toString() + s, Toast.LENGTH_SHORT).show();
-        }
-        if (NavMap.mechanicDp.getVisibility() == View.GONE) {
-            NavMap.startCheckingForMechanicResponse(s.split(":")[0]);
         }
     }
 

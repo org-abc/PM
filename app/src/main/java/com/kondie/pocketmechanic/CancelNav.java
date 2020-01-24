@@ -89,7 +89,7 @@ public class CancelNav extends AsyncTask<Void, Void, String> {
 
         pDialog.dismiss();
         if (s.equals("congrats")){
-            Toast.makeText(NavMap.activity, "Order canceled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(NavMap.activity, "Request canceled", Toast.LENGTH_SHORT).show();
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("driverEmail", "");
             editor.putString("requestId", "");
