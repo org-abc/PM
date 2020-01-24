@@ -93,7 +93,6 @@ public class GetUserInfo extends AsyncTask<String, Void, String> {
             editor.putString("phone", userOb.getString("phone"));
             editor.putString("email", userOb.getString("email"));
 
-            Toast.makeText(MainActivity.activity, reqStr, Toast.LENGTH_LONG).show();
             if (!reqStr.equalsIgnoreCase("empty")){
                 JSONObject reqOb = new JSONObject(reqStr);
                 editor.putString("status", "busy");
