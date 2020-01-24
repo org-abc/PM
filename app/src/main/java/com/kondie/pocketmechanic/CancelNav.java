@@ -98,7 +98,7 @@ public class CancelNav extends AsyncTask<Void, Void, String> {
 
             NavMap.activity.finish();
         }else if (s.equalsIgnoreCase("sorry")){
-            Toast.makeText(NavMap.activity, "You can't cancel a request after it has been accepted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(NavMap.activity, "You can't cancel a request after the mechanic has arrived", Toast.LENGTH_SHORT).show();
         }
         else{
             Toast.makeText(NavMap.activity, "Something went wrong" + s, Toast.LENGTH_SHORT).show();

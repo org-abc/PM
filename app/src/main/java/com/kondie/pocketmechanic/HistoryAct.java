@@ -2,6 +2,10 @@ package com.kondie.pocketmechanic;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +24,9 @@ public class HistoryAct extends AppCompatActivity {
     public static List<HistoryItem> historyItems;
     public static HistoryAdapter historyAdapter;
     private LinearLayoutManager linearLayMan;
+    private static ProgressBar progressBar;
+    private static LinearLayout linearLayout;
+    private Button retryButt;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,11 +35,33 @@ public class HistoryAct extends AppCompatActivity {
         activity = this;
 
         toolbar = findViewById(R.id.history_toolbar);
+        progressBar = findViewById(R.id.history_progress_bar);
+        retryButt = findViewById(R.id.history_reload_butt);
+        linearLayout = findViewById(R.id.failed_to_load_history);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         historyList = findViewById(R.id.history_list);
         setUpHistoryList();
+
+        retryButt.setOnClickListener(reload);
+    }
+
+    private View.OnClickListener reload = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            progressBar.setVisibility(View.VISIBLE);
+            linearLayout.setVisibility(View.GONE);
+            new GetHistory().execute("5050-00-00 00:00:00");
+        }
+    };
+
+    public static ProgressBar getProgressBar() {
+        return progressBar;
+    }
+
+    public static LinearLayout getLinearLayout() {
+        return linearLayout;
     }
 
     private void setUpHistoryList(){

@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -29,15 +30,6 @@ public class GetHistory extends AsyncTask<String, Void, String> {
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
-    private ProgressDialog progressDialog;
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        progressDialog = new ProgressDialog(HistoryAct.activity);
-        progressDialog.setTitle("Collecting history...");
-        progressDialog.show();
-    }
 
     @Override
     protected String doInBackground(String... params) {
@@ -95,57 +87,45 @@ public class GetHistory extends AsyncTask<String, Void, String> {
         super.onPostExecute(s);
 
         try{
-            progressDialog.dismiss();
-            JSONObject allDAta = new JSONObject(s);
-            String requestsString = allDAta.getString("requests");
-            String mechanicsString = allDAta.getString("mechanics");
-
-            JSONArray requestsArr = new JSONArray(requestsString);
-            JSONArray mechanicsArr = new JSONArray(mechanicsString);
-
-            for(int c=0; c<requestsArr.length(); c++){
-
-                HistoryItem item = new HistoryItem();
-                JSONObject request = requestsArr.getJSONObject(c);
-                try{
-                    JSONObject driver = mechanicsArr.getJSONObject(c);
-                    item.setDriverName(driver.getString("fname") + " " + driver.getString("lname"));
-                }catch (Exception e){
-                    item.setDriverName("None");
-                }
-                item.setOrderAmount(request.getString("min_service_fee"));
-                item.setDateCreated(request.getString("date_created"));
-                item.setStatus(request.getString("status"));
-                item.setIssue(request.getString("issue"));
-                item.setServiceFee(request.getString("min_service_fee"));
-                item.setId(String.valueOf(request.getInt("id")));
-
-                item.setOrderName("issue");
-
-                HistoryAct.historyItems.add(item);
-            }
-            HistoryAct.historyAdapter.notifyDataSetChanged();
-
-        }catch (Exception e){
             if (s.equals("empty")){
                 Toast.makeText(HistoryAct.activity, "You have no history", Toast.LENGTH_SHORT).show();
             }
             else {
-                new AlertDialog.Builder(HistoryAct.activity).setCancelable(false).setTitle("Something went wrong. Retry?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                                new GetHistory().execute("5050-00-00 00:00:00");
-                            }
-                        })
-                        .setNegativeButton("no", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                HistoryAct.activity.finish();
-                            }
-                        }).show();
+                HistoryAct.getProgressBar().setVisibility(View.GONE);
+                JSONObject allDAta = new JSONObject(s);
+                String requestsString = allDAta.getString("requests");
+                String mechanicsString = allDAta.getString("mechanics");
+
+                JSONArray requestsArr = new JSONArray(requestsString);
+                JSONArray mechanicsArr = new JSONArray(mechanicsString);
+
+                for (int c = 0; c < requestsArr.length(); c++) {
+
+                    HistoryItem item = new HistoryItem();
+                    JSONObject request = requestsArr.getJSONObject(c);
+                    try {
+                        JSONObject driver = mechanicsArr.getJSONObject(c);
+                        item.setDriverName(driver.getString("fname") + " " + driver.getString("lname"));
+                    } catch (Exception e) {
+                        item.setDriverName("None");
+                    }
+                    item.setOrderAmount(request.getString("min_service_fee"));
+                    item.setDateCreated(request.getString("date_created"));
+                    item.setStatus(request.getString("status"));
+                    item.setIssue(request.getString("issue"));
+                    item.setServiceFee(request.getString("min_service_fee"));
+                    item.setId(String.valueOf(request.getInt("id")));
+
+                    item.setOrderName("issue");
+
+                    HistoryAct.historyItems.add(item);
+                }
+                HistoryAct.historyAdapter.notifyDataSetChanged();
             }
+
+        }catch (Exception e){
+            HistoryAct.getProgressBar().setVisibility(View.GONE);
+            HistoryAct.getLinearLayout().setVisibility(View.VISIBLE);
         }
     }
 }

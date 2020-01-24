@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -148,14 +149,8 @@ public class SubmitSignInForm extends AsyncTask<String, Void, String> {
                     Toast.makeText(SignIn.activity, "Something went wrong", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    new AlertDialog.Builder(WelcomeAct.activity).setCancelable(false).setTitle("Something went wrong")
-                            .setPositiveButton("RETRY", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    dialogInterface.dismiss();
-                                    new SubmitSignInForm().execute(email, pass, "welcome");
-                                }
-                            }).show();
+                    WelcomeAct.getProgressBar().setVisibility(View.GONE);
+                    WelcomeAct.getLinearLayout().setVisibility(View.VISIBLE);
                 }
             }
         } catch (Exception e) {
@@ -163,15 +158,8 @@ public class SubmitSignInForm extends AsyncTask<String, Void, String> {
 //                Toast.makeText(SignIn.activity, e.toString() + s, Toast.LENGTH_SHORT).show();
             }
             else{
-                new AlertDialog.Builder(WelcomeAct.activity).setCancelable(false).setTitle("Something went wrong")
-                        .setPositiveButton("RETRY", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                                new SubmitSignInForm().execute(email, pass, "welcome");
-                            }
-                        }).show();
-//                Toast.makeText(WelcomeAct.activity, e.toString() + s, Toast.LENGTH_SHORT).show();
+                WelcomeAct.getProgressBar().setVisibility(View.GONE);
+                WelcomeAct.getLinearLayout().setVisibility(View.VISIBLE);
             }
         }
     }

@@ -5,9 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import java.util.Random;
 
@@ -22,6 +26,10 @@ public class WelcomeAct extends AppCompatActivity {
 
     ImageView welcomeImg;
     public static Activity activity;
+    private static ProgressBar progressBar;
+    private static LinearLayout linearLayout;
+    private Button retryButt;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,7 +41,10 @@ public class WelcomeAct extends AppCompatActivity {
 
         welcomeImg = findViewById(R.id.welcome_img);
         setImage();
-        SharedPreferences prefs = getSharedPreferences("PM", Context.MODE_PRIVATE);
+        progressBar = findViewById(R.id.login_progress_bar);
+        retryButt = findViewById(R.id.login_reload_butt);
+        linearLayout = findViewById(R.id.failed_to_login);
+        prefs = getSharedPreferences("PM", Context.MODE_PRIVATE);
         if (prefs.getString("signUpState", "").equalsIgnoreCase("verification")){
             Intent toVerifyIntent = new Intent(activity, VerifAct.class);
             toVerifyIntent.putExtra("email", prefs.getString("email", ""));
@@ -42,6 +53,25 @@ public class WelcomeAct extends AppCompatActivity {
         else {
             new SubmitSignInForm().execute(prefs.getString("email", ""), prefs.getString("password", ""), "welcome");
         }
+
+        retryButt.setOnClickListener(reload);
+    }
+
+    private View.OnClickListener reload = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            progressBar.setVisibility(View.VISIBLE);
+            linearLayout.setVisibility(View.GONE);
+            new SubmitSignInForm().execute(prefs.getString("email", ""), prefs.getString("password", ""), "welcome");
+        }
+    };
+
+    public static LinearLayout getLinearLayout() {
+        return linearLayout;
+    }
+
+    public static ProgressBar getProgressBar() {
+        return progressBar;
     }
 
     private void setImage(){
