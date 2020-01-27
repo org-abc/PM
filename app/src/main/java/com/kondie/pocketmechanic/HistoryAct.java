@@ -21,10 +21,9 @@ public class HistoryAct extends AppCompatActivity {
     public static Activity activity;
     private RecyclerView historyList;
     private Toolbar toolbar;
-    public static List<HistoryItem> historyItems;
     public static HistoryAdapter historyAdapter;
     private LinearLayoutManager linearLayMan;
-    private static ProgressBar progressBar;
+    private static ProgressBar progressBar, loadMoreProgressBar;
     private static LinearLayout linearLayout;
     private Button retryButt;
 
@@ -36,6 +35,7 @@ public class HistoryAct extends AppCompatActivity {
 
         toolbar = findViewById(R.id.history_toolbar);
         progressBar = findViewById(R.id.history_progress_bar);
+        loadMoreProgressBar = findViewById(R.id.load_more_history_progress_bar);
         retryButt = findViewById(R.id.history_reload_butt);
         linearLayout = findViewById(R.id.failed_to_load_history);
         setSupportActionBar(toolbar);
@@ -52,7 +52,12 @@ public class HistoryAct extends AppCompatActivity {
         public void onClick(View view) {
             progressBar.setVisibility(View.VISIBLE);
             linearLayout.setVisibility(View.GONE);
-            new GetHistory().execute("5050-00-00 00:00:00");
+            if (MainActivity.historyItems.size() == 0) {
+                new GetHistory().execute(MainActivity.lastHistoryDate);
+            }
+            else{
+                progressBar.setVisibility(View.GONE);
+            }
         }
     };
 
@@ -64,15 +69,30 @@ public class HistoryAct extends AppCompatActivity {
         return linearLayout;
     }
 
+    public static ProgressBar getLoadMoreProgressBar() {
+        return loadMoreProgressBar;
+    }
+
     private void setUpHistoryList(){
 
-        historyItems = new ArrayList<>();
         linearLayMan = new LinearLayoutManager(activity);
         linearLayMan.setOrientation(RecyclerView.VERTICAL);
         historyList.setLayoutManager(linearLayMan);
-        historyAdapter = new HistoryAdapter(activity, historyItems, historyList);
+        historyAdapter = new HistoryAdapter(activity, MainActivity.historyItems, historyList);
+        historyAdapter.setOnEndOfListListener(new OnEndOfListListener() {
+            @Override
+            public void onEndOfList() {
+                loadMoreProgressBar.setVisibility(View.VISIBLE);
+                new GetHistory().execute(MainActivity.lastHistoryDate);
+            }
+        });
         historyList.setAdapter(historyAdapter);
 
-        new GetHistory().execute("5050-00-00 00:00:00");
+        if (MainActivity.historyItems.size() == 0) {
+            new GetHistory().execute(MainActivity.lastHistoryDate);
+        }
+        else{
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }

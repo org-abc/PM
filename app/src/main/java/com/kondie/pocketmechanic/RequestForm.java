@@ -60,6 +60,14 @@ public class RequestForm extends AppCompatActivity {
         reqButt.setOnClickListener(sendRequest);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (MainActivity.userLocation == null){
+            RequestForm.this.finish();
+        }
+    }
+
     private View.OnClickListener sendRequest = new View.OnClickListener() {
         @Override
         public void onClick(View view) {

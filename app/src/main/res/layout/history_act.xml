@@ -10,6 +10,12 @@
             android:background="@color/white"
             android:elevation="4dp"/>
 
+    <ProgressBar
+        android:id="@+id/load_more_history_progress_bar"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="40dp"/>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

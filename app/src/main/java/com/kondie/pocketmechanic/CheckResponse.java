@@ -125,6 +125,9 @@ public class CheckResponse extends AsyncTask<String, Void,String> {
                         editor.putFloat("mechanicLat", (float) jsonOb.getDouble("lat"));
                         editor.putFloat("mechanicLng", (float) jsonOb.getDouble("lng"));
                         editor.putString("mechanicImagePath", jsonOb.getString("image_path"));
+                        editor.putString("mechanicFname", jsonOb.getString("fname"));
+                        editor.putString("mechanicLname", jsonOb.getString("lname"));
+                        editor.putFloat("mechanicRating", (float) jsonOb.getDouble("rating"));
                         editor.putString("mechanicPhone", jsonOb.getString("phone"));
                         editor.commit();
                         NavMap.mechanicLat = (float) jsonOb.getDouble("lat");

@@ -19,11 +19,12 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Drop off location"
-                android:textColor="@color/black"
+                android:text="Where is the car?"
+                android:textColor="@color/colorAccent"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_horizontal"
                 android:padding="10dp"
+            android:textSize="30sp"
                 android:background="#FFFFFF"/>
 
         <ProgressBar

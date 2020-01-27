@@ -2,6 +2,7 @@ package com.kondie.pocketmechanic;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +17,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -54,6 +57,7 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
     private ImageView backButt;
     private static String resp;
     public static PolylineOptions lineOptions;
+    private Dialog mechanicProfileDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,10 +83,40 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
 
             callMechanicFb.setOnClickListener(callMechanic);
             backButt.setOnClickListener(goBack);
+            mechanicDp.setOnClickListener(openMechanicDialog);
         }catch (Exception e){
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
+
+    private View.OnClickListener openMechanicDialog = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            try {
+                mechanicProfileDialog = new Dialog(activity);
+                mechanicProfileDialog.setContentView(R.layout.mechanic_profile);
+                mechanicProfileDialog.setCancelable(true);
+
+                ImageView mechanicDialogDp = mechanicProfileDialog.findViewById(R.id.mechanic_dialog_dp);
+                TextView mechanicDialogName = mechanicProfileDialog.findViewById(R.id.mechanic_dialog_name);
+                RatingBar mechanicDialogRating = mechanicProfileDialog.findViewById(R.id.mechanic_dialog_rating);
+
+                mechanicDialogName.setText(prefs.getString("mechanicFname", "") + " " + prefs.getString("mechanicLname", ""));
+                mechanicDialogRating.setRating(prefs.getFloat("mechanicRating", 0));
+                Picasso.with(activity).load(prefs.getString("mechanicImagePath", "")).into(mechanicDialogDp);
+
+                WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                lp.copyFrom(mechanicProfileDialog.getWindow().getAttributes());
+                lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+                mechanicProfileDialog.show();
+                mechanicProfileDialog.getWindow().setAttributes(lp);
+            }catch (Exception e){
+//                Toast.makeText(NavMap.this, "" + e, Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
     private View.OnClickListener goBack = new View.OnClickListener() {
         @Override

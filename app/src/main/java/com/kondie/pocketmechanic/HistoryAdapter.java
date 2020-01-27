@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class HistoryAdapter extends RecyclerView.Adapter<HistoryHolder> implements OnEndOfListListener {
+public class HistoryAdapter extends RecyclerView.Adapter<HistoryHolder> {
 
     Activity activity;
     List<HistoryItem> historyItems;
@@ -42,16 +42,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryHolder> implemen
                 lastVisibleItem = linearLayMan.findLastVisibleItemPosition();
                 if (!isLoading && totalItemCount <= (lastVisibleItem + visibleThreshold) && historyItems.size() % 10 == 0) {
                     if (onEndOfListListener != null) {
+                        isLoading = true;
                         onEndOfListListener.onEndOfList();
                     }
                 }
             }
         });
-    }
-
-    @Override
-    public void onEndOfList() {
-        isLoading = true;
     }
 
     public void setOnEndOfListListener(OnEndOfListListener onEndOfListListener) {
@@ -88,6 +84,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryHolder> implemen
                 holder.status.setTextColor(activity.getResources().getColor(R.color.green));
             }
             holder.date.setText(item.getDateCreated());
+            MainActivity.lastHistoryDate = item.dateCreated;
 
         } catch (Exception e) {
             Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show();

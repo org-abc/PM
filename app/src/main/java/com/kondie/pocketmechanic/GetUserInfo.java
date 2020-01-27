@@ -97,6 +97,8 @@ public class GetUserInfo extends AsyncTask<String, Void, String> {
                 JSONObject reqOb = new JSONObject(reqStr);
                 editor.putString("status", "busy");
                 editor.putString("requestId", String.valueOf(reqOb.getInt("id")));
+                editor.putFloat("dropOffLat", (float) reqOb.getDouble("user_lat"));
+                editor.putFloat("dropOffLng", (float) reqOb.getDouble("user_lng"));
             }
             else{
                 editor.putString("driverEmail", "");

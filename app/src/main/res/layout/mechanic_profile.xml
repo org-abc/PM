@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/AppTheme.mineDark"
+    android:background="@color/blue_grey"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/mechanic_dialog_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="kondelelani nedzingahe"
+        android:gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:layout_margin="25dp"
+        android:textSize="25sp"/>
+
+    <RatingBar
+        android:id="@+id/mechanic_dialog_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:rating="5"
+        android:clickable="false"
+        android:layout_margin="15dp"/>
+
+    <ImageView
+        android:id="@+id/mechanic_dialog_dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="400dp"
+        android:src="@drawable/user_icon" />
+
+</LinearLayout>

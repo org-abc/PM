@@ -62,6 +62,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -109,6 +110,8 @@ public class MainActivity extends AppCompatActivity
     public static final int NOTIF_ID = 1;
     public static boolean isSelectedShopOpened;
     private Button trackButt;
+    public static String lastHistoryDate = "5050-00-00 00:00:00";
+    public static List<HistoryItem> historyItems;
 
     private TableRow towing, tires, engine, battery, brakes, electronics, lights;
 
@@ -132,11 +135,12 @@ public class MainActivity extends AppCompatActivity
 
             coolLoading = new CoolLoading(activity);
             trackButt = findViewById(R.id.track_mechanic_butt);
+            historyItems = new ArrayList<>();
 
             trackButt.setOnClickListener(startTracking);
             setUpOptionList();
 
-            if (prefs.getString("orderId", "").equals("")) {
+            if (prefs.getString("requestId", "").equals("")) {
                 openFullMap();
             } else {
                 dropOffLoc = new LatLng(prefs.getFloat("dropOffLat", (float) 0.0), prefs.getFloat("dropOffLng", (float) 0.0));
