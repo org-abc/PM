@@ -119,7 +119,7 @@ public class RequestForm extends AppCompatActivity {
                         imageFileName = getImageFile();
 
                     } catch (Exception e) {
-                        Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show();
                     }
 
                     if (imageFileName != null) {
@@ -130,7 +130,7 @@ public class RequestForm extends AppCompatActivity {
                     }
                 }
             }catch (Exception e){
-                Toast.makeText(RequestForm.this, e.toString(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(RequestForm.this, e.toString(), Toast.LENGTH_LONG).show();
             }
         }
     };
@@ -147,7 +147,7 @@ public class RequestForm extends AppCompatActivity {
             return imageFile;
 
         }catch (Exception e){
-            Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show();
         }
 
         return null;
@@ -207,7 +207,7 @@ public class RequestForm extends AppCompatActivity {
             }
 
         }catch (Exception e){
-            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         }
         reqPic.setImageBitmap(rotatedImageBitmap);
     }

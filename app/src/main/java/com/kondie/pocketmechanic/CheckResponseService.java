@@ -82,7 +82,7 @@ public class CheckResponseService extends IntentService {
                 inStream.close();
 
                 String s = result.toString();
-                Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
 
                 String response = s.split(":")[0];
                 if (response.equalsIgnoreCase("decline")){
@@ -111,7 +111,7 @@ public class CheckResponseService extends IntentService {
             }
 
         } catch (Exception e) {
-            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 

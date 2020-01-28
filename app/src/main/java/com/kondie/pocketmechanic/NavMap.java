@@ -85,7 +85,7 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
             backButt.setOnClickListener(goBack);
             mechanicDp.setOnClickListener(openMechanicDialog);
         }catch (Exception e){
-            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -292,7 +292,7 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
             editor.commit();
             new CheckResponse().execute();
         }catch (Exception e){
-            Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 }

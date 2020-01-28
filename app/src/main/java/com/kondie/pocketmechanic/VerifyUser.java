@@ -116,7 +116,7 @@ public class VerifyUser extends AsyncTask<String, Void, String> {
                 Toast.makeText(VerifAct.activity, "Something went wrong."+s+"__", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            Toast.makeText(VerifAct.activity, e.toString() + s, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(VerifAct.activity, e.toString() + s, Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -73,7 +73,7 @@ public class GetDistance extends AsyncTask<Float, Void, String> {
             if (reqNum == 0) {
             }
             else if (reqNum == 1) {
-                Toast.makeText(MainActivity.activity, e.toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.activity, e.toString(), Toast.LENGTH_SHORT).show();
             }
         }
     }

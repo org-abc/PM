@@ -63,7 +63,8 @@
         <activity android:name=".SignUp"></activity>
         <activity android:name=".VerifAct"></activity>
         <activity android:name=".NavMap"
-            android:label="">
+            android:label=""
+            android:launchMode="singleInstance">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>
         </activity>

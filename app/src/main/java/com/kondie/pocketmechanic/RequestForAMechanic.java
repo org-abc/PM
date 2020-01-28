@@ -118,7 +118,7 @@ public class RequestForAMechanic extends AsyncTask<String, Void, String> {
                             }
                         }).show();
             }else{
-                Toast.makeText(RequestForm.activity, s, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(RequestForm.activity, s, Toast.LENGTH_SHORT).show();
             }
 
         }catch (Exception e){

@@ -15,7 +15,8 @@ public class NotificationHelper {
     public static void sendNotif(Context context, String tittle, String contentText){
         try {
             Intent toMainIntent = new Intent(context, MainActivity.class);
-            toMainIntent.putExtra("track", "yes");
+            toMainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            toMainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             PendingIntent toMainPIntent = PendingIntent.getActivity(context, MainActivity.NOTIF_ID, toMainIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             NotificationCompat.Builder notif = new NotificationCompat.Builder(context, MainActivity.CHANNEL_ID);
@@ -31,7 +32,7 @@ public class NotificationHelper {
             NotificationManagerCompat notifMan = NotificationManagerCompat.from(context);
             notifMan.notify(MainActivity.NOTIF_ID, notif.build());
         }catch (Exception e){
-            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+//            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
         }
     }
 

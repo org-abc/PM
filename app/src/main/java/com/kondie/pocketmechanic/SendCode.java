@@ -128,7 +128,7 @@ public class SendCode extends AsyncTask<String, Void, String> {
                 Toast.makeText(activity, "This user doesn't exist", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            Toast.makeText(activity, e.toString() + s, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(activity, e.toString() + s, Toast.LENGTH_SHORT).show();
         }
     }
 }

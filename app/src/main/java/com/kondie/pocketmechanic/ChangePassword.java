@@ -105,7 +105,7 @@ public class ChangePassword extends AsyncTask<String, Void, String> {
                 Toast.makeText(ForgotPassword.activity, "Make sure the code is correct", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            Toast.makeText(ForgotPassword.activity, e.toString() + s, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(ForgotPassword.activity, e.toString() + s, Toast.LENGTH_SHORT).show();
         }
     }
 }

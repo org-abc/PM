@@ -1,17 +1,12 @@
 package com.kondie.pocketmechanic;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.RatingBar;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -100,10 +95,12 @@ public class CheckResponse extends AsyncTask<String, Void,String> {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     dialogInterface.dismiss();
-                                    showReviewDialog();
                                 }
                             });
                     if (s.split(":")[0].equals("done")){
+                        if (!prefs.getString("requestId", "").equals("")) {
+                            MainActivity.sendFeedback(prefs.getString("requestId", ""));
+                        }
                         editor.putString("driverEmail", "");
                         editor.putString("requestId", "");
                         editor.putString("status", "free");
@@ -141,35 +138,6 @@ public class CheckResponse extends AsyncTask<String, Void,String> {
             }
         }catch (Exception e){
 //            Toast.makeText(NavMap.activity, "++++=" + e.toString() + s, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-    private void showReviewDialog(){
-        final Dialog ratingDialog;
-        ratingDialog = new Dialog(NavMap.activity);
-        if (ratingDialog != null) {
-            ratingDialog.setContentView(R.layout.rating_dialog);
-
-            TextView submitRatingButt = ratingDialog.findViewById(R.id.submit_rating);
-            final EditText mechanicComment = ratingDialog.findViewById(R.id.mechanic_review);
-            final RatingBar mechanicRating = ratingDialog.findViewById(R.id.mechanic_rating);
-
-            submitRatingButt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    new SendFeedback().execute(requestId, String.valueOf(mechanicRating.getRating()), mechanicComment.getText().toString());
-                    ratingDialog.dismiss();
-                }
-            });
-
-            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-            lp.copyFrom(ratingDialog.getWindow().getAttributes());
-            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-
-            ratingDialog.show();
-            ratingDialog.getWindow().setAttributes(lp);
         }
     }
 }

@@ -119,7 +119,7 @@ public class SubmitSignUpForm extends AsyncTask<String, Void, String> {
             }
             else
             {
-                Toast.makeText(SignUp.activity, "Something went wrong." + s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUp.activity, "Something went wrong.", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
         }

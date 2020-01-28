@@ -87,7 +87,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryHolder> {
             MainActivity.lastHistoryDate = item.dateCreated;
 
         } catch (Exception e) {
-            Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -101,6 +101,9 @@ public class GetUserInfo extends AsyncTask<String, Void, String> {
                 editor.putFloat("dropOffLng", (float) reqOb.getDouble("user_lng"));
             }
             else{
+                if (!prefs.getString("requestId", "").equals("")) {
+                    MainActivity.sendFeedback(prefs.getString("requestId", ""));
+                }
                 editor.putString("driverEmail", "");
                 editor.putString("requestId", "");
                 editor.putString("status", "free");

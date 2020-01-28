@@ -2,11 +2,13 @@ package com.kondie.pocketmechanic;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
@@ -16,13 +18,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,7 +73,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -150,17 +152,26 @@ public class MainActivity extends AppCompatActivity
             }
             createNotificationChannel();
         }catch (NullPointerException e){
-            Toast.makeText(activity, e.toString(), Toast.LENGTH_LONG).show();
+//            Toast.makeText(activity, e.toString(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    public static void sendFeedback(final String requestId){
         try {
-            if (getIntent().getExtras().getString("track") != null && getIntent().getExtras().getString("track").equals("yes")) {
-                if (!prefs.getString("orderId", "").equals("")) {
-                    Intent toNavIntent = new Intent(activity, NavMap.class);
-                    activity.startActivity(toNavIntent);
-                }
-            }
-        }catch (NullPointerException e){
-            Toast.makeText(activity, e.toString(), Toast.LENGTH_LONG).show();
+            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(activity)
+                    .setCancelable(false)
+                    .setTitle("Done")
+                    .setMessage("Your mechanic has set the job as finished")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                            showReviewDialog(requestId);
+                        }
+                    });
+            alertBuilder.show();
+        }catch (Exception e){
+//            Toast.makeText(activity, "" + e, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -279,7 +290,7 @@ public class MainActivity extends AppCompatActivity
                 }
             });
         }catch (Exception e){
-            Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -328,7 +339,7 @@ public class MainActivity extends AppCompatActivity
                     .enableAutoManage(this, this)
                     .build();
         } catch (Exception e) {
-            Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(activity, e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -545,10 +556,38 @@ public class MainActivity extends AppCompatActivity
             fullMapDialog.getWindow().setAttributes(lp);
 
         }catch (Exception e){
-            Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
+
+    private static void showReviewDialog(final String requestId){
+        final Dialog ratingDialog;
+        ratingDialog = new Dialog(activity);
+        if (ratingDialog != null) {
+            ratingDialog.setContentView(R.layout.rating_dialog);
+
+            TextView submitRatingButt = ratingDialog.findViewById(R.id.submit_rating);
+            final EditText mechanicComment = ratingDialog.findViewById(R.id.mechanic_review);
+            final RatingBar mechanicRating = ratingDialog.findViewById(R.id.mechanic_rating);
+
+            submitRatingButt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new SendFeedback().execute(requestId, String.valueOf(mechanicRating.getRating()), mechanicComment.getText().toString());
+                    ratingDialog.dismiss();
+                }
+            });
+
+            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+            lp.copyFrom(ratingDialog.getWindow().getAttributes());
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+            ratingDialog.show();
+            ratingDialog.getWindow().setAttributes(lp);
+        }
+    }
     private void setUserMarker(final GoogleMap googleMap) {
 
         long delayTime = 5000;

@@ -50,7 +50,7 @@ public class DirectionsJSONParser {
             }
 
         }catch (Exception e){
-            Toast.makeText(NavMap.activity, e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(NavMap.activity, e.toString(), Toast.LENGTH_SHORT).show();
         }
 
         return routes;

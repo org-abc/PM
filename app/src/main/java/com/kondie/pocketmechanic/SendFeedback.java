@@ -21,31 +21,13 @@ public class SendFeedback extends AsyncTask<String, Void, String> {
 
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
-    private ProgressDialog pDialog;
     String requestId, mechanicRating, mechanicReview;
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-
-        try {
-            pDialog = new ProgressDialog(NavMap.activity);
-        }catch (Exception e){
-
-        }
-        if (pDialog != null) {
-            pDialog.setMessage("Sending feedback...");
-            pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            pDialog.setCancelable(false);
-            pDialog.show();
-        }
-    }
 
     @Override
     protected String doInBackground(String... params) {
 
         try {
-            prefs = NavMap.activity.getSharedPreferences("PM", Context.MODE_PRIVATE);
+            prefs = MainActivity.activity.getSharedPreferences("PM", Context.MODE_PRIVATE);
             editor = prefs.edit();
             requestId = params[0];
             mechanicRating = params[1];
@@ -98,14 +80,10 @@ public class SendFeedback extends AsyncTask<String, Void, String> {
         super.onPostExecute(s);
 
         try {
-            pDialog.dismiss();
-        }catch (Exception e){}
-
-        try {
             if (s.equals("congrats")){
-                NavMap.activity.finish();
+                MainActivity.activity.finish();
             }else{
-                new AlertDialog.Builder(NavMap.activity).setCancelable(false).setMessage("Failed to send the feedback. Retry?").setCancelable(false)
+                new AlertDialog.Builder(MainActivity.activity).setCancelable(false).setMessage("Failed to send the feedback. Retry?").setCancelable(false)
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -115,12 +93,12 @@ public class SendFeedback extends AsyncTask<String, Void, String> {
                         .setNegativeButton("no", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                NavMap.activity.finish();
+                                dialogInterface.dismiss();
                             }
                         }).show();
             }
         } catch (Exception e) {
-//            Toast.makeText(NavMap.activity, e.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.activity, e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 }
