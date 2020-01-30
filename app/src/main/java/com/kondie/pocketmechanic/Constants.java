@@ -13,6 +13,6 @@ public class Constants {
     public static final String RECEIVER = PACKAGE_NAME + ".RECEIVER";
     public static final String RESULT_DATA_KEY = PACKAGE_NAME + ".RESULT_DATA_KEY";
     public static final String LOCATION_DATA_EXTRA = PACKAGE_NAME + ".LOCATION_DATA_EXTRA";
-    public static final String PM_HOSTING_WEBSITE = "https://pocketmechanic.000webhostapp.com/";
+    public static final String PM_HOSTING_WEBSITE = "https://specials-1523610414581.appspot.com/";
     public static final String[] serviceOptions = {"Towing", "Flat tire", "Engine problems", "Flat/dead battery", "Faulty brakes", "Electronics", "Lights"};
 }
