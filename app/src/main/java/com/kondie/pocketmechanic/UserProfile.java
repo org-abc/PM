@@ -48,7 +48,7 @@ public class UserProfile extends AppCompatActivity {
         fullName.setText(prefs.getString("lname", "") + " " + prefs.getString("fname", ""));
         email.setText(prefs.getString("email", ""));
         phone.setText(prefs.getString("phone", ""));
-        Picasso.with(this).load(prefs.getString("imagePath", "")).into(userDp);
+        Picasso.with(this).load(prefs.getString("imagePath", "").replace(Constants.WRONG_PART, Constants.CORRECT_PART)).placeholder(R.drawable.user_icon).into(userDp);
     }
 
     @Override

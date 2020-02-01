@@ -103,7 +103,7 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
 
                 mechanicDialogName.setText(prefs.getString("mechanicFname", "") + " " + prefs.getString("mechanicLname", ""));
                 mechanicDialogRating.setRating(prefs.getFloat("mechanicRating", 0));
-                Picasso.with(activity).load(prefs.getString("mechanicImagePath", "")).into(mechanicDialogDp);
+                Picasso.with(activity).load(prefs.getString("mechanicImagePath", "").replace(Constants.WRONG_PART, Constants.CORRECT_PART)).placeholder(R.drawable.user_icon).into(mechanicDialogDp);
 
                 WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
                 lp.copyFrom(mechanicProfileDialog.getWindow().getAttributes());
@@ -244,7 +244,7 @@ public class NavMap extends AppCompatActivity implements OnMapReadyCallback {
         }else if (response.equalsIgnoreCase("accept") || response.equalsIgnoreCase("arrived")) {
 
             try {
-                Picasso.with(activity).load(prefs.getString("mechanicImagePath", "")).into(mechanicDp);
+                Picasso.with(activity).load(prefs.getString("mechanicImagePath", "").replace(Constants.WRONG_PART, Constants.CORRECT_PART)).placeholder(R.drawable.user_icon).into(mechanicDp);
             } catch (Exception e) {
             }
             mechanicDp.setVisibility(View.VISIBLE);

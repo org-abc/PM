@@ -55,7 +55,7 @@ public class UpdateProfile extends AppCompatActivity {
         fname.setText(prefs.getString("lname", ""));
         lname.setText(prefs.getString("fname", ""));
         phone.setText(prefs.getString("phone", ""));
-        Picasso.with(this).load(prefs.getString("imagePath", "")).into(userDp);
+        Picasso.with(this).load(prefs.getString("imagePath", "").replace(Constants.WRONG_PART, Constants.CORRECT_PART)).placeholder(R.drawable.user_icon).into(userDp);
 
         updateButt.setOnClickListener(updateIt);
         userDp.setOnClickListener(openGalley);

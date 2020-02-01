@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity
             ImageView menuDp = headerView.findViewById(R.id.menu_dp);
 
             fullName.setText(prefs.getString("lname", "") + " " + prefs.getString("fname", ""));
-            Picasso.with(activity).load(prefs.getString("imagePath", "")).into(menuDp);
+            Picasso.with(activity).load(prefs.getString("imagePath", "").replace(Constants.WRONG_PART, Constants.CORRECT_PART)).placeholder(R.drawable.user_icon).into(menuDp);
 
             viewProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
