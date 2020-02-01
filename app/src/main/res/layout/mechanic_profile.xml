@@ -23,6 +23,7 @@
         android:stepSize="0.5"
         android:rating="5"
         android:clickable="false"
+        android:isIndicator="true"
         android:layout_margin="15dp"/>
 
     <ImageView
