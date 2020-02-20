@@ -108,7 +108,7 @@ public class UpdateProfile extends AppCompatActivity {
     private String getImageName(){
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmSS").format(new Date());
-        String imageName = "Skopo_user_" + fname.getText().toString() + "_" + timeStamp;
+        String imageName = "pm_user_" + fname.getText().toString() + "_" + timeStamp;
 
         if (isDpChanged) {
             return (imageName);
