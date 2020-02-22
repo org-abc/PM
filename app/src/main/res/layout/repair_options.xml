@@ -242,6 +242,41 @@
 
         </TableRow>
 
+        <TableRow
+            android:id="@+id/option_other"
+            android:tag="other"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:elevation="4dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/other"
+                    android:scaleType="centerCrop"
+                    android:layout_margin="5dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Other"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:padding="15dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:background="@drawable/option_item"/>
+
+            </FrameLayout>
+
+        </TableRow>
+
     </TableLayout>
 
 </ScrollView>

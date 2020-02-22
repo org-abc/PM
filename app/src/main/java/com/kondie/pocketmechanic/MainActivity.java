@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity
     public static String lastHistoryDate = "5050-00-00 00:00:00";
     public static List<HistoryItem> historyItems;
 
-    private TableRow towing, tires, engine, battery, brakes, electronics, lights;
+    private TableRow towing, tires, engine, battery, brakes, electronics, lights, other;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,6 +225,7 @@ public class MainActivity extends AppCompatActivity
         brakes = findViewById(R.id.option_brakes);
         electronics = findViewById(R.id.option_electronics);
         lights = findViewById(R.id.option_lights);
+        other = findViewById(R.id.option_other);
 
         towing.setOnClickListener(showForm);
         tires.setOnClickListener(showForm);
@@ -233,6 +234,7 @@ public class MainActivity extends AppCompatActivity
         brakes.setOnClickListener(showForm);
         electronics.setOnClickListener(showForm);
         lights.setOnClickListener(showForm);
+        other.setOnClickListener(showForm);
     }
 
     public static String getImageName(){

@@ -17,6 +17,7 @@ public class NotificationHelper {
             Intent toMainIntent = new Intent(context, MainActivity.class);
             toMainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             toMainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            toMainIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             PendingIntent toMainPIntent = PendingIntent.getActivity(context, MainActivity.NOTIF_ID, toMainIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             NotificationCompat.Builder notif = new NotificationCompat.Builder(context, MainActivity.CHANNEL_ID);

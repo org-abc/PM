@@ -17,5 +17,5 @@ public class Constants {
     public static final String BUCKET_NAME = "pocket_mechanic_bucket2";
     public static final String WRONG_PART = BUCKET_NAME + ".storage.googleapis.com";
     public static final String CORRECT_PART = "storage.googleapis.com/" + BUCKET_NAME;
-    public static final String[] serviceOptions = {"Towing", "Flat tire", "Engine problems", "Flat/dead battery", "Faulty brakes", "Electronics", "Lights"};
+    public static final String[] serviceOptions = {"Towing", "Flat tire", "Engine problems", "Flat/dead battery", "Faulty brakes", "Electronics", "Lights", "Other"};
 }

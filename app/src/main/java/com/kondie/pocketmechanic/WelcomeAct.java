@@ -76,7 +76,7 @@ public class WelcomeAct extends AppCompatActivity {
 
     private void setImage(){
         Random random = new Random();
-        int num = random.nextInt(5);
+        int num = random.nextInt(8);
         switch (num) {
             case 0:
                 welcomeImg.setImageResource(R.drawable.tires);
@@ -92,6 +92,10 @@ public class WelcomeAct extends AppCompatActivity {
                 break;
             case 4:
                 welcomeImg.setImageResource(R.drawable.headlights);
+            case 5:
+                welcomeImg.setImageResource(R.drawable.battery);
+            case 6:
+                welcomeImg.setImageResource(R.drawable.other);
                 break;
         }
     }
