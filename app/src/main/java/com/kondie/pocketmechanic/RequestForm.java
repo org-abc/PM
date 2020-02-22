@@ -74,7 +74,7 @@ public class RequestForm extends AppCompatActivity {
 
             if (!prefs.getString("status", "").equalsIgnoreCase("busy")) {
                 if (!reqMakeAndModel.getText().toString().equalsIgnoreCase("")) {
-                    new AlertDialog.Builder(activity).setCancelable(false).setTitle("Are you sure you want a mechanic?").setMessage("This will cost you at least R" + serviceFee)
+                    new AlertDialog.Builder(activity).setCancelable(false).setTitle("Are you sure you want a mechanic?").setMessage("The consultation fee is R" + serviceFee)
                             .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
